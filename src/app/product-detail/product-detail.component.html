@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="row">
+    <div class="col-5">
+      <img src="assets/img/{{ product.pic }}" alt="product image" class="img-fluid" />
+    </div>
+    <div class="col-7 p-5">
+      <h4>{{ product.name }}</h4>
+      <p class="card-text">
+        <span class="pt-2 d-block font-weight-bold">Price:</span>
+        {{ product.price | currency:'Rp.':'symbol' }}
+
+        <span class="pt-2 d-block font-weight-bold">Description:</span>
+        {{ product.description }}
+      </p>
+    </div>
+  </div>
+
+</div>

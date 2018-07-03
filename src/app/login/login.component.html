@@ -1,0 +1,17 @@
+<form class="form-signin" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <img class="mb-4" src="https://getbootstrap.com/docs/4.1/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+  <h1 class="h3 mb-3 font-weight-normal">Admin sign in</h1>
+  <label for="inputEmail" class="sr-only">Username</label>
+  <input formControlName="username" class="form-control" placeholder="Username" required autofocus>
+  <div *ngIf="submitted && f.username.errors">
+      <div *ngIf="f.username.errors.required">Username is required</div>
+  </div>
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input formControlName="password" type="password" class="form-control" placeholder="Password" required>
+  <div *ngIf="submitted && f.password.errors">
+      <div *ngIf="f.password.errors.required">Password is required</div>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+  <div *ngIf="error" class="alert alert-danger mt-3">{{ error }}</div>
+</form>

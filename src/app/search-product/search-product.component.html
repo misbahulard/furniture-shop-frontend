@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-3">
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          Search result for: {{ keyword }}
+        </div>
+      </div>
+    </div>
+    <div class="col-9">
+      <h5 class="pb-1">Search result:</h5>
+      <div class="row mb-3">
+        <div *ngFor="let product of products" class="col-4 mb-3">
+          <a routerLink="/product/{{ product.idProduct }}" class="card text-dark" style="text-decoration: none;">
+            <img class="card-img-top" src="assets/img/{{product.pic}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{ product.name | truncate:20 }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{ product.price | currency:'Rp.':'symbol' }}</h6>
+              <p class="card-text">{{ product.description | truncate:100 }}</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  

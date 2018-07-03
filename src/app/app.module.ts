@@ -1,14 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http'
+import { ReactiveFormsModule } from '@angular/forms'
+
+import { TruncatePipe } from './truncate'
 
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { CollectionComponent } from './collection/collection.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { SearchProductComponent } from './search-product/search-product.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    TruncatePipe,
+    CollectionComponent,
+    ProductDetailComponent,
+    SearchProductComponent,
+    LoginComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
+    NgbModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
