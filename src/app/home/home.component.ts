@@ -28,12 +28,12 @@ export class HomeComponent implements OnInit {
 
   getProducts(): void {
     this.productService.getproducts()
-      .subscribe(products => { this.products = products });
+      .subscribe(products => { this.products = products; });
   }
 
   getCategories(): void {
     this.categoryService.getCategories()
-      .subscribe(categories => { this.categories = categories });
+      .subscribe(categories => { this.categories = categories; });
   }
 
 }

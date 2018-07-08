@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Product } from './product';
+import { url } from 'inspector';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -46,6 +47,26 @@ export class ProductService {
     return this.http.get<Product[]>(url).pipe(
       catchError(this.handleError<Product[]>('search product', []))
     );
+  }
+
+  addProduct(product: Product ): Observable<Product> {
+      return this.http.post<Product>(this.productsUrl, product, httpOptions).pipe(
+        catchError(this.handleError<Product>('add new product', null))
+      )
+    }
+
+  deleteProduct(idProduct: number): Observable<Product>{
+    const url = `${this.productsUrl}/${idProduct}`;
+    return this.http.delete<Product>(url, httpOptions).pipe(
+      catchError(this.handleError<Product>('delete product', null))
+    );
+  }
+
+  updateProduct(idProduct: number, product: Product): Observable<Product>{
+    const url = `${this.productsUrl}/${idProduct}`;
+    return this.http.put<Product>(url, product, httpOptions).pipe(
+      catchError(this.handleError<Product>('update product', null))
+    )
   }
 
   /**

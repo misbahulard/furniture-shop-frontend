@@ -1,0 +1,42 @@
+<form class="form-add" [formGroup]="addForm"  (ngSubmit)="onSubmit()">
+  <h4><strong>Add Product</strong></h4>
+  <hr>
+  <div class="form-group">
+    <input type="text" formControlName="idProduct" class="form-control" hidden>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+        <label>Kategori</label>
+      <select formControlName="idCategoryProduct" class="form-control">
+        <option value="" selected>Choose...</option>
+        <option *ngFor="let category of categories" value="{{category.idCategory}}">
+          {{category.category}}
+        </option>
+        <!-- <option value="1">Meja</option>
+        <option value="2">Kursi</option> -->
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Nama Produk</label> 
+    <input formControlName="nameProduct" class="form-control" placeholder="Nama Product...">
+  </div >
+  <div class="form-group">
+    <label>Deskirpsi Produk</label> 
+    <input formControlName="productDescription" class="form-control" placeholder="Deskripsi Produk...">
+  </div>
+  <div class="form-group">
+    <label>Harga</label>
+    <input type="number" formControlName="productPrice" class="form-control" placeholder="Harga...">
+  </div>
+  <div class="form-group">
+    <label>Gambar</label>
+    <input formControlName="productPict" class="form-control" placeholder="Gambar...">
+  </div>
+  <div class="form-group">
+    <input type="submit" class="btn btn-primary" value="Submit">
+  </div>
+
+  <div *ngIf="error" class="alert alert-success">{{error}}</div>
+  
+</form>

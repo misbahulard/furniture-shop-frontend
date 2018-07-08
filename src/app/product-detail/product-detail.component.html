@@ -12,6 +12,8 @@
         <span class="pt-2 d-block font-weight-bold">Description:</span>
         {{ product.description }}
       </p>
+      <a class="btn btn-warning mr-1" routerLink="/edit-product/{{id}}">Edit</a>
+      <a class="btn btn-danger text-white" (click)="delete()">Delete</a>
     </div>
   </div>
 
