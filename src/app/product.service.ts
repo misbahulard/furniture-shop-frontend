@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Product } from './product';
-import { url } from 'inspector';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -49,11 +48,19 @@ export class ProductService {
     );
   }
 
-  addProduct(product: Product ): Observable<Product> {
-      return this.http.post<Product>(this.productsUrl, product, httpOptions).pipe(
-        catchError(this.handleError<Product>('add new product', null))
-      )
-    }
+  addProduct(product: Product, picToUpload: File): Observable<Product> {
+    const formData: FormData = new FormData();
+    formData.append('file', picToUpload, picToUpload.name);
+    formData.append('idProduct', product.idProduct.toString());
+    formData.append('idCategory', product.idCategory.toString());
+    formData.append('name', product.name);
+    formData.append('description', product.description);
+    formData.append('price', product.price.toString());
+
+    return this.http.post<Product>(this.productsUrl, formData).pipe(
+      catchError(this.handleError<Product>('add new product', null))
+    )
+  }
 
   deleteProduct(idProduct: number): Observable<Product>{
     const url = `${this.productsUrl}/${idProduct}`;
@@ -62,9 +69,17 @@ export class ProductService {
     );
   }
 
-  updateProduct(idProduct: number, product: Product): Observable<Product>{
+  updateProduct(idProduct: number, product: Product, picToUpload: File): Observable<Product>{
     const url = `${this.productsUrl}/${idProduct}`;
-    return this.http.put<Product>(url, product, httpOptions).pipe(
+    const formData: FormData = new FormData();
+    formData.append('file', picToUpload, picToUpload.name);
+    formData.append('idProduct', product.idProduct.toString());
+    formData.append('idCategory', product.idCategory.toString());
+    formData.append('name', product.name);
+    formData.append('description', product.description);
+    formData.append('price', product.price.toString());
+
+    return this.http.put<Product>(url, formData).pipe(
       catchError(this.handleError<Product>('update product', null))
     )
   }

@@ -18,6 +18,7 @@ export class ProductEditComponent implements OnInit {
   id: number;
   product: Product;
   error: String;
+  picToUpload: File = null;
 
   constructor(
     private productService: ProductService,
@@ -32,7 +33,7 @@ export class ProductEditComponent implements OnInit {
     this.getCategories();
 
     this.editForm = this.formBuilder.group({
-      idProduct: ['0'],
+      idProduct: [''],
       idCategoryProduct: [''],
       nameProduct: [''],
       productDescription: [''],
@@ -81,23 +82,25 @@ export class ProductEditComponent implements OnInit {
       idCategory,
       name,
       description,
-      price,
-      pic
+      price
     } as Product;
-    console.log(obj);
-    this.updateProduct(obj);
+    this.updateProduct(obj, this.picToUpload);
 
   }
 
-  updateProduct(product: Product): void{
+  updateProduct(product: Product, picToUpload: File): void{
     this.id = +this.route.snapshot.paramMap.get('id');
-    this.productService.updateProduct(this.id, product)
+    this.productService.updateProduct(this.id, product, picToUpload)
       .subscribe(
         () => {
           var url = `/product/${this.id}`;
           this.router.navigate([url]);
         }
       )
+  }
+
+  handlePicInput(files: FileList) {
+    this.picToUpload = files.item(0);
   }
 
 }

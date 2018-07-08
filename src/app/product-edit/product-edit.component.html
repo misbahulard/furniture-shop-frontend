@@ -13,8 +13,6 @@
           <option *ngFor="let category of categories" value="{{category.idCategory}}">
             {{category.category}}
           </option>
-          <!-- <option value="1">Meja</option>
-          <option value="2">Kursi</option> -->
         </select>
       </div>
     </div>
@@ -32,7 +30,7 @@
     </div>
     <div class="form-group">
       <label>Gambar</label>
-      <input formControlName="productPict" class="form-control" placeholder="Gambar...">
+      <input type="file" id="file" class="form-control" (change)="handlePicInput($event.target.files)">
     </div>
     <div class="form-group">
       <input type="submit" class="btn btn-primary" value="Submit">

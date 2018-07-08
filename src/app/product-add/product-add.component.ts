@@ -18,6 +18,7 @@ export class ProductAddComponent implements OnInit {
   submitted = false;
   product: Product;
   error: String;
+  picToUpload: File = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,7 +54,6 @@ export class ProductAddComponent implements OnInit {
     var name = this.f.nameProduct.value;
     var description = this.f.productDescription.value;
     var price = this.f.productPrice.value;
-    var pic = this.f.productPict.value;
 
     var obj = {
       idProduct,
@@ -61,20 +61,22 @@ export class ProductAddComponent implements OnInit {
       name,
       description,
       price,
-      pic
     } as Product;
-    console.log(obj);
-    this.addProduct(obj);
 
+    this.addProduct(obj, this.picToUpload);
   }
 
-  addProduct(product: Product): void{
-    this.productService.addProduct(product).subscribe(
+  addProduct(product: Product, picToUpload: File): void{
+    this.productService.addProduct(product, picToUpload).subscribe(
       ()=>{
         this.error = 'Success Added Data';
       }, error => {
         this.error = error.error.message;
       });
+  }
+
+  handlePicInput(files: FileList) {
+    this.picToUpload = files.item(0);
   }
 
 }
